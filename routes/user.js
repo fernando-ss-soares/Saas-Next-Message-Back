@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
 
-    const { email, password } = req.body
+    const { email, password } = req.query
 
     if(!email) {
         return res.status(406).json({
@@ -23,7 +23,15 @@ router.get('/', async (req, res) => {
 
     const user = await User.findOne({ next_email: email })
 
-    const check_password = await bcrypt.compare(password, user.next_password);
+    console.log(user)
+
+    if(user == null) {
+        return res.status(406).json({
+            'Alert': 'not found user'
+        })
+    }
+
+    const check_password = await bcrypt.compare(password, user?.next_password);
 
     if(!check_password) {
         return res.status(401).json({
@@ -41,6 +49,11 @@ router.get('/', async (req, res) => {
 
         return res.status(200).json({
             'Message': {
+                'User': {
+                    next_name: user?.next_name,
+                    next_lastname: user?.next_lastname,
+                    next_email: user?.next_email
+                },
                 'Auth': 'user authenticated',
                 'Token': token
             } 
