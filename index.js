@@ -20,6 +20,12 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        'Message':'API Funcionando!'
+    })
+})
+
 morganBody(app);
 
 app.use('/login', auth);
