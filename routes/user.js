@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
 
-    const { email, password } = req.query
+    const { email, password } = req.body
 
     if(!email) {
         return res.status(406).json({
@@ -99,9 +99,9 @@ router.post('/', async (req, res) => {
     const password_hash = await bcrypt.hash(password, salt);
 
     const user = {
-        name,
-        lastname,
-        email,
+        next_name: name,
+        next_lastname: lastname,
+        next_email: email,
         next_password: password_hash
     }
 
