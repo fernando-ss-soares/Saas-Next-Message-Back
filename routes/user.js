@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
 
-    const { email, password } = req.body
+    const { email, password } = req.query
 
     if(!email) {
         return res.status(406).json({
@@ -22,8 +22,6 @@ router.get('/', async (req, res) => {
     }
 
     const user = await User.findOne({ next_email: email })
-
-    console.log(user)
 
     if(user == null) {
         return res.status(406).json({
