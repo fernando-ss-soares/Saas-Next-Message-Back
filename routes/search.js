@@ -1,9 +1,10 @@
 import express from "express";
 import User from "../model/user.js";
+import validToken from "../auth/auth.js"; 
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', validToken, async (req, res) => {
     
     const Users = await User.find({});
 
