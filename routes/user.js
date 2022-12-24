@@ -2,6 +2,7 @@ import express from "express";
 import User from "../model/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { v4 as uuid } from 'uuid';
 
 const router = express.Router();
 
@@ -97,6 +98,7 @@ router.post('/', async (req, res) => {
     const password_hash = await bcrypt.hash(password, salt);
 
     const user = {
+        next_id: uuid(),
         next_name: name,
         next_lastname: lastname,
         next_email: email,
