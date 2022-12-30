@@ -72,13 +72,13 @@ router.post('/', async (req, res) => {
 
     if(!name) {
         return res.status(406).json({
-            'Alert': 'field email it is in blank'
+            'Alert': 'field name it is in blank'
         })
     }
 
     if(!lastname) {
         return res.status(406).json({
-            'Alert': 'field email it is in blank'
+            'Alert': 'field lastname it is in blank'
         })
     }
 
@@ -90,7 +90,7 @@ router.post('/', async (req, res) => {
 
     if(!password) {
         return res.status(406).json({
-            'Alert': 'field email it is in blank'
+            'Alert': 'field password it is in blank'
         })
     }
 
